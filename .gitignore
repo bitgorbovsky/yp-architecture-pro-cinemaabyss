@@ -139,6 +139,7 @@ terraform.tfstate.backup
 *.dll
 *.so
 *.dylib
+events-service
 
 # Test binary, built with `go test -c`
 *.test
