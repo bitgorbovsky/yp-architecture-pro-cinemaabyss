@@ -38,7 +38,8 @@ if movies_url == nil or monolith_url == nil or events_url == nil then
     os.exit(1)
 end
 
-local monolith
+local monolith_movies
+local monolith_users = { target = monolith_url.target }
 local movies = { target = movies_url.target }
 local events = { target = events_url.target }
 if is_gradual then
@@ -48,9 +49,9 @@ if is_gradual then
                          Should be a number from 0 to 100\n')
         os.exit(1)
     end
-    local monolith_weight = 100 - movies_weight
-    if monolith_weight > 0 then
-        monolith = {
+    local monolith_movies_weight = 100 - movies_weight
+    if monolith_movies_weight > 0 then
+        monolith_movies = {
             target = monolith_url.target;
             weight = 100 - movies_weight
         }
@@ -63,12 +64,25 @@ print(lyaml.dump({{
     _transform = true;
     services = {
         {
+            name = 'users-service';
+            host = 'users-upstream';
+            routes = {
+                {
+                    name = 'users-route';
+                    strip_path = false;
+                    paths = {
+                        '/api/users'
+                    }
+                }
+            }
+        },
+        {
             name = 'movies-service';
             host = 'movies-upstream';
-            protocol = movies_url.protocol;
             routes = {
                 {
                     name = 'movies-route';
+                    strip_path = false;
                     paths = {
                         '/api/movies'
                     }
@@ -78,10 +92,10 @@ print(lyaml.dump({{
         {
             name = 'events-service';
             host = 'events-upstream';
-            protocol = events_url.protocol;
             routes = {
                 {
                     name = 'events-route';
+                    strip_path = false;
                     paths = {
                         '/api/events'
                     }
@@ -94,13 +108,19 @@ print(lyaml.dump({{
             name = 'movies-upstream';
             targets = {
                 movies;
-                monolith
+                monolith_movies
             }
         };
         {
             name = 'events-upstream';
             targets = {
                 events
+            }
+        },
+        {
+            name = 'users-upstream';
+            targets = {
+                monolith_users
             }
         }
     }
