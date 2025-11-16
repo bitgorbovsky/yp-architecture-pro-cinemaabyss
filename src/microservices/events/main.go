@@ -1,12 +1,17 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"sync"
+	"syscall"
+	"time"
 
 	"github.com/IBM/sarama"
 	"github.com/go-playground/validator/v10"
@@ -55,32 +60,73 @@ type EventResponse struct {
 	Event     *Event `json:"event"`
 }
 
-var producer sarama.SyncProducer
+type Session struct {
+	ready chan bool
+}
 
-const MOVIE_EVENTS_TOPIC = "movie-events"
-const USER_EVENTS_TOPIC = "user-events"
-const PAYMENT_EVENTS_TOPIC = "payment-events"
+func (self *Session) Setup(sarama.ConsumerGroupSession) error {
+	close(self.ready)
+	return nil
+}
+
+func (self *Session) Cleanup(sarama.ConsumerGroupSession) error {
+	return nil
+}
+
+func (self *Session) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
+	for {
+		select {
+		case message, ok := <-claim.Messages():
+			if !ok {
+				log.Printf("message channel was closed")
+				return nil
+			}
+			log.Printf("event: %s; ts = %v, topic = %s", string(message.Value), message.Timestamp, message.Topic)
+			session.MarkMessage(message, "")
+		case <-session.Context().Done():
+			return nil
+		}
+	}
+}
+
+var (
+	producer sarama.SyncProducer
+	consumer sarama.ConsumerGroup
+	running  bool
+)
+
+const (
+	MOVIE_EVENTS_TOPIC   = "movie-events"
+	USER_EVENTS_TOPIC    = "user-events"
+	PAYMENT_EVENTS_TOPIC = "payment-events"
+)
+
+var TOPICS = []string{
+	MOVIE_EVENTS_TOPIC,
+	USER_EVENTS_TOPIC,
+	PAYMENT_EVENTS_TOPIC}
 
 func main() {
+	running = true
+
 	// Set up HTTP routes
 	http.HandleFunc("/api/events/movie", handleMovieEvent)
 	http.HandleFunc("/api/events/user", handleUserEvent)
 	http.HandleFunc("/api/events/payment", handlePaymentEvent)
 	http.HandleFunc("/api/events/health", handleHealth)
 
-	brokers := strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
-	log.Printf("brokers: %s", brokers)
-
-	var err error
-	producer, err = sarama.NewSyncProducer(brokers, nil)
-	if err != nil {
-		log.Fatalf("cannot connect to Kafka: %s", err.Error())
-		os.Exit(1)
-		return
-	}
+	createProducer()
+	createConsumer()
 	defer func() {
 		if producer != nil {
-			producer.Close()
+			if err := producer.Close(); err != nil {
+				log.Fatalf("cannot close producer")
+			}
+		}
+		if consumer != nil {
+			if err := consumer.Close(); err != nil {
+				log.Fatalf("cannot close consumer")
+			}
 		}
 	}()
 
@@ -91,6 +137,101 @@ func main() {
 	}
 	log.Printf("start events service listening %s port", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
+
+func createProducer() {
+	brokers := strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
+	log.Printf("brokers: %s", brokers)
+
+	attempts := 15
+
+	for attempts > 0 {
+		var err error
+		producer, err = sarama.NewSyncProducer(brokers, nil)
+		if err != nil {
+			log.Printf("cannot connect producer to Kafka: %s", err.Error())
+			attempts--
+			if attempts == 0 {
+				log.Fatalf("cannot connect producer to Kafka: %s; exit", err.Error())
+			}
+			time.Sleep(5 * time.Second)
+		} else {
+			log.Printf("producer connected")
+			break
+		}
+	}
+}
+
+func createConsumer() {
+	brokers := strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
+	config := sarama.NewConfig()
+	config.Version = sarama.DefaultVersion
+	config.Consumer.Group.Rebalance.GroupStrategies = []sarama.BalanceStrategy{
+		sarama.NewBalanceStrategyRange()}
+	config.Consumer.Offsets.Initial = sarama.OffsetOldest
+
+	attempts := 15
+
+	for attempts > 0 {
+		var err error
+		consumer, err = sarama.NewConsumerGroup(brokers, "events-consumer", config)
+		if err != nil {
+			log.Printf("cannot connect consumer to Kafka: %s", err.Error())
+			attempts--
+			if attempts == 0 {
+				log.Fatalf("cannot connect consumer to Kafka: %s; exit", err.Error())
+			}
+			time.Sleep(5 * time.Second)
+		} else {
+			log.Printf("consumer connected")
+			break
+		}
+	}
+
+	session := Session{ready: make(chan bool)}
+	ctx, cancel := context.WithCancel(context.Background())
+	wg := &sync.WaitGroup{}
+	wg.Add(1)
+
+	go func() {
+		defer wg.Done()
+		for {
+			if err := consumer.Consume(ctx, TOPICS, &session); err != nil {
+				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
+					return
+				}
+				log.Panicf("Error from consumer: %v", err)
+			}
+			if ctx.Err() != nil {
+				return
+			}
+			session.ready = make(chan bool)
+		}
+	}()
+
+	sigterm := make(chan os.Signal, 1)
+	signal.Notify(sigterm, syscall.SIGINT, syscall.SIGTERM)
+
+	go func() {
+		<-session.ready
+		log.Println("consumer is active")
+		for running {
+			select {
+			case <-ctx.Done():
+				log.Println("terminating: context cancelled")
+				running = false
+			case <-sigterm:
+				log.Println("terminating: via signal")
+				running = false
+			}
+		}
+
+		cancel()
+		wg.Wait()
+		if err := consumer.Close(); err != nil {
+			log.Panicf("Error closing client: %v", err)
+		}
+	}()
 }
 
 func handleHealth(w http.ResponseWriter, r *http.Request) {
@@ -166,9 +307,10 @@ func handlePaymentEvent(w http.ResponseWriter, r *http.Request) {
 			}
 
 			pushAndReply(w, PAYMENT_EVENTS_TOPIC, &Event{
-				Id:      uuid.New().String(),
-				Type:    "payment",
-				Payload: event,
+				Id:        uuid.New().String(),
+				Type:      "payment",
+				Payload:   event,
+				Timestamp: time.Now().Format(time.RFC3339),
 			})
 		}
 	default:
