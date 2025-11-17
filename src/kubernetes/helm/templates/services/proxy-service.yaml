@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: proxy-service
-        image: {{ .Values.proxyService.image.repository }}:{{ .Values.eventsService.image.tag }}
+        image: {{ .Values.proxyService.image.repository }}:{{ .Values.proxyService.image.tag }}
         imagePullPolicy: {{ .Values.proxyService.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.proxyService.service.targetPort }}
@@ -41,13 +41,13 @@ spec:
           {{- toYaml .Values.proxyService.resources | nindent 10 }}
         readinessProbe:
           httpGet:
-            path: /api/events/health
+            path: /health
             port: {{ .Values.proxyService.service.targetPort }}
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
-            path: /api/events/health
+            path: /health
             port: {{ .Values.proxyService.service.targetPort }}
           initialDelaySeconds: 15
           periodSeconds: 20
@@ -66,7 +66,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   selector:
-    app: events-service
+    app: proxy-service
   ports:
   - port: {{ .Values.proxyService.service.port }}
     targetPort: {{ .Values.proxyService.service.targetPort }}
