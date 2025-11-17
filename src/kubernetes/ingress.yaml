@@ -11,8 +11,13 @@ spec:
     - host: cinemaabyss.example.com
       http:
         paths:
-          #дополните конфигурацию для /
-          ...
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: monolith
+                port:
+                  number: 8080
           - path: /api/events
             pathType: Prefix
             backend:
@@ -20,3 +25,10 @@ spec:
                 name: events-service
                 port:
                   number: 8082
+          - path: /api/movies
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 8000
