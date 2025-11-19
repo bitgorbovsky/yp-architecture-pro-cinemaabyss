@@ -1,0 +1,18 @@
+➜  yp-architecture-pro-cinemaabyss git:(cinema) ✗ helm install cinemaabyss ./src/kubernetes/helm --namespace cinemaabyss --create-namespace
+
+NAME: cinemaabyss
+LAST DEPLOYED: Wed Nov 19 20:07:38 2025
+NAMESPACE: cinemaabyss
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+➜  yp-architecture-pro-cinemaabyss git:(cinema) ✗ helm -n cinemaabyss ls
+NAME       	NAMESPACE  	REVISION	UPDATED                                	STATUS  	CHART            	APP VERSION
+cinemaabyss	cinemaabyss	1       	2025-11-19 20:07:38.230903908 +0300 MSK	deployed	cinemaabyss-0.1.0	1.0.0
+➜  yp-architecture-pro-cinemaabyss git:(cinema) ✗ helm -n cinemaabyss status cinemaabyss
+NAME: cinemaabyss
+LAST DEPLOYED: Wed Nov 19 20:07:38 2025
+NAMESPACE: cinemaabyss
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None

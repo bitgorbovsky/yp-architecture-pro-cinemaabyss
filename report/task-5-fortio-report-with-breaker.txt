@@ -1,0 +1,129 @@
+{"ts":1763573292.343542,"level":"warn","r":162,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":38,"run":0}
+{"ts":1763573292.343565,"level":"warn","r":127,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":3,"run":0}
+{"ts":1763573292.343412,"level":"warn","r":153,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":29,"run":0}
+{"ts":1763573292.343658,"level":"warn","r":155,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":31,"run":0}
+{"ts":1763573292.343417,"level":"warn","r":168,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":44,"run":0}
+{"ts":1763573292.343440,"level":"warn","r":128,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":4,"run":0}
+{"ts":1763573292.344428,"level":"warn","r":132,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":8,"run":0}
+{"ts":1763573292.344958,"level":"warn","r":138,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":14,"run":0}
+{"ts":1763573292.345554,"level":"warn","r":135,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":11,"run":0}
+{"ts":1763573292.345667,"level":"warn","r":148,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":24,"run":0}
+{"ts":1763573292.345697,"level":"warn","r":158,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":34,"run":0}
+{"ts":1763573292.346524,"level":"warn","r":132,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":8,"run":0}
+{"ts":1763573292.346617,"level":"warn","r":153,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":29,"run":0}
+{"ts":1763573292.348780,"level":"warn","r":153,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":29,"run":0}
+{"ts":1763573292.349137,"level":"warn","r":132,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":8,"run":0}
+{"ts":1763573292.349235,"level":"warn","r":158,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":34,"run":0}
+{"ts":1763573292.351060,"level":"warn","r":132,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":8,"run":0}
+{"ts":1763573292.353751,"level":"warn","r":169,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":45,"run":0}
+{"ts":1763573292.355078,"level":"warn","r":169,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":45,"run":0}
+{"ts":1763573292.356152,"level":"warn","r":169,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":45,"run":0}
+{"ts":1763573292.357274,"level":"warn","r":169,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":45,"run":0}
+{"ts":1763573292.358236,"level":"warn","r":169,"file":"http_client.go","line":1151,"msg":"Non ok http code","code":503,"status":"HTTP/1.1 503","thread":45,"run":0}
+Ended after 144.455233ms : 500 calls. qps=3461.3
+Aggregated Function Time : count 500 avg 0.011234747 +/- 0.006516 min 0.000896971 max 0.069339234 sum 5.6173733
+# range, mid point, percentile, count
+>= 0.000896971 <= 0.001 , 0.000948485 , 0.40, 2
+> 0.001 <= 0.002 , 0.0015 , 2.80, 12
+> 0.002 <= 0.003 , 0.0025 , 4.40, 8
+> 0.003 <= 0.004 , 0.0035 , 6.40, 10
+> 0.004 <= 0.005 , 0.0045 , 10.40, 20
+> 0.005 <= 0.006 , 0.0055 , 15.60, 26
+> 0.006 <= 0.007 , 0.0065 , 19.60, 20
+> 0.007 <= 0.008 , 0.0075 , 27.00, 37
+> 0.008 <= 0.009 , 0.0085 , 35.40, 42
+> 0.009 <= 0.01 , 0.0095 , 44.20, 44
+> 0.01 <= 0.011 , 0.0105 , 52.40, 41
+> 0.011 <= 0.012 , 0.0115 , 59.20, 34
+> 0.012 <= 0.014 , 0.013 , 77.60, 92
+> 0.014 <= 0.016 , 0.015 , 89.60, 60
+> 0.016 <= 0.018 , 0.017 , 91.60, 10
+> 0.018 <= 0.02 , 0.019 , 95.80, 21
+> 0.02 <= 0.025 , 0.0225 , 98.20, 12
+> 0.025 <= 0.03 , 0.0275 , 98.60, 2
+> 0.03 <= 0.035 , 0.0325 , 98.80, 1
+> 0.035 <= 0.04 , 0.0375 , 99.00, 1
+> 0.04 <= 0.045 , 0.0425 , 99.40, 2
+> 0.05 <= 0.06 , 0.055 , 99.60, 1
+> 0.06 <= 0.0693392 , 0.0646696 , 100.00, 2
+# target 50% 0.0107073
+# target 75% 0.0137174
+# target 90% 0.0164
+# target 99% 0.04
+# target 99.9% 0.0670044
+Error cases : count 489 avg 0.010639844 +/- 0.004426 min 0.000896971 max 0.025819867 sum 5.2028837
+# range, mid point, percentile, count
+>= 0.000896971 <= 0.001 , 0.000948485 , 0.41, 2
+> 0.001 <= 0.002 , 0.0015 , 2.86, 12
+> 0.002 <= 0.003 , 0.0025 , 4.50, 8
+> 0.003 <= 0.004 , 0.0035 , 6.54, 10
+> 0.004 <= 0.005 , 0.0045 , 10.43, 19
+> 0.005 <= 0.006 , 0.0055 , 15.75, 26
+> 0.006 <= 0.007 , 0.0065 , 19.84, 20
+> 0.007 <= 0.008 , 0.0075 , 27.40, 37
+> 0.008 <= 0.009 , 0.0085 , 35.99, 42
+> 0.009 <= 0.01 , 0.0095 , 44.99, 44
+> 0.01 <= 0.011 , 0.0105 , 53.37, 41
+> 0.011 <= 0.012 , 0.0115 , 60.33, 34
+> 0.012 <= 0.014 , 0.013 , 79.14, 92
+> 0.014 <= 0.016 , 0.015 , 91.41, 60
+> 0.016 <= 0.018 , 0.017 , 93.46, 10
+> 0.018 <= 0.02 , 0.019 , 97.55, 20
+> 0.02 <= 0.025 , 0.0225 , 99.80, 11
+> 0.025 <= 0.0258199 , 0.0254099 , 100.00, 1
+# target 50% 0.0105976
+# target 75% 0.0135598
+# target 90% 0.01577
+# target 99% 0.0232318
+# target 99.9% 0.025419
+# Socket and IP used for each connection:
+[0]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0012832996 +/- 0.001686 min 0.00025944 max 0.005961411 sum 0.012832996
+[1]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003288252 +/- 0.0002855 min 6.3755e-05 max 0.001124617 sum 0.003288252
+[2]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0011825932 +/- 0.001673 min 0.000167822 max 0.005895746 sum 0.011825932
+[3]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0006677445 +/- 0.0006943 min 6.3456e-05 max 0.002120155 sum 0.006677445
+[4]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0010076404 +/- 0.001728 min 6.955e-05 max 0.005929834 sum 0.010076404
+[5]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003183248 +/- 0.0003511 min 5.874e-05 max 0.001042798 sum 0.003183248
+[6]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004721262 +/- 0.0006476 min 5.991e-05 max 0.002075222 sum 0.004721262
+[7]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0006110434 +/- 0.000687 min 7.6688e-05 max 0.001997233 sum 0.006110434
+[8]   9 socket used, resolved to 10.99.224.16:8081, connection timing : count 9 avg 0.00046095989 +/- 0.0002265 min 7.6447e-05 max 0.000768135 sum 0.004148639
+[9]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004855533 +/- 0.000567 min 6.8841e-05 max 0.001988293 sum 0.004855533
+[10]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004445726 +/- 0.0004412 min 7.1718e-05 max 0.001285428 sum 0.004445726
+[11]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0011546547 +/- 0.001729 min 6.8667e-05 max 0.005879152 sum 0.011546547
+[12]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003136183 +/- 0.0002812 min 7.7469e-05 max 0.00098371 sum 0.003136183
+[13]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0008353693 +/- 0.0006624 min 0.000129551 max 0.002344907 sum 0.008353693
+[14]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002448254 +/- 0.0001714 min 7.276e-05 max 0.000583969 sum 0.002448254
+[15]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002247141 +/- 0.0001904 min 5.1038e-05 max 0.000641448 sum 0.002247141
+[16]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0005086352 +/- 0.0006519 min 6.3733e-05 max 0.0020365 sum 0.005086352
+[17]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003692117 +/- 0.0002445 min 6.0333e-05 max 0.000854175 sum 0.003692117
+[18]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0005462949 +/- 0.0007404 min 7.0852e-05 max 0.002593573 sum 0.005462949
+[19]   9 socket used, resolved to 10.99.224.16:8081, connection timing : count 9 avg 0.00025139567 +/- 0.0003047 min 6.9901e-05 max 0.001071106 sum 0.002262561
+[20]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002790906 +/- 0.0003633 min 7.2003e-05 max 0.001335365 sum 0.002790906
+[21]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003256474 +/- 0.0003383 min 6.9604e-05 max 0.001236581 sum 0.003256474
+[22]   9 socket used, resolved to 10.99.224.16:8081, connection timing : count 9 avg 0.00028426533 +/- 0.000206 min 7.666e-05 max 0.000755866 sum 0.002558388
+[23]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003784262 +/- 0.0003151 min 7.2549e-05 max 0.000973634 sum 0.003784262
+[24]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003882893 +/- 0.0006563 min 6.0348e-05 max 0.002334173 sum 0.003882893
+[25]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002413606 +/- 0.0002839 min 7.3004e-05 max 0.000854258 sum 0.002413606
+[26]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003655581 +/- 0.0007289 min 6.1612e-05 max 0.002548151 sum 0.003655581
+[27]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003997517 +/- 0.0004005 min 8.9107e-05 max 0.001293713 sum 0.003997517
+[28]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003007592 +/- 0.0002345 min 6.1964e-05 max 0.00077894 sum 0.003007592
+[29]   8 socket used, resolved to 10.99.224.16:8081, connection timing : count 8 avg 0.00030808037 +/- 0.0002529 min 8.3107e-05 max 0.000734317 sum 0.002464643
+[30]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004705576 +/- 0.0003677 min 6.2351e-05 max 0.001110585 sum 0.004705576
+[31]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0005913605 +/- 0.0007733 min 6.2035e-05 max 0.002826594 sum 0.005913605
+[32]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0005224141 +/- 0.0004261 min 6.8383e-05 max 0.001243102 sum 0.005224141
+[33]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004921046 +/- 0.0004202 min 0.000105689 max 0.001624821 sum 0.004921046
+[34]   9 socket used, resolved to 10.99.224.16:8081, connection timing : count 9 avg 0.00041706933 +/- 0.0002703 min 9.0104e-05 max 0.000912002 sum 0.003753624
+[35]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004397879 +/- 0.0006846 min 6.3854e-05 max 0.002367506 sum 0.004397879
+[36]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0004894228 +/- 0.0004878 min 6.9378e-05 max 0.001631519 sum 0.004894228
+[37]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003967469 +/- 0.0005883 min 6.0661e-05 max 0.002128688 sum 0.003967469
+[38]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0005103254 +/- 0.0004806 min 0.000137446 max 0.001688031 sum 0.005103254
+[39]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0001463828 +/- 6.019e-05 min 6.5073e-05 max 0.000264947 sum 0.001463828
+[40]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0009238557 +/- 0.00169 min 5.5987e-05 max 0.005623816 sum 0.009238557
+[41]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0003477068 +/- 0.0003307 min 6.4673e-05 max 0.00106044 sum 0.003477068
+[42]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0006635083 +/- 0.0007333 min 6.2931e-05 max 0.00233666 sum 0.006635083
+[43]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002314785 +/- 0.0002001 min 5.8016e-05 max 0.000742842 sum 0.002314785
+[44]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002647534 +/- 0.0001493 min 0.00010544 max 0.000643198 sum 0.002647534
+[45]   8 socket used, resolved to 10.99.224.16:8081, connection timing : count 8 avg 0.00045292688 +/- 0.0005823 min 8.7527e-05 max 0.001887839 sum 0.003623415
+[46]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0005237615 +/- 0.0005203 min 6.7269e-05 max 0.001809825 sum 0.005237615
+[47]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0006678283 +/- 0.0006191 min 6.7387e-05 max 0.00185556 sum 0.006678283
+[48]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0006123976 +/- 0.000664 min 7.5111e-05 max 0.002189237 sum 0.006123976
+[49]  10 socket used, resolved to 10.99.224.16:8081, connection timing : count 10 avg 0.0002845238 +/- 0.0002633 min 5.9527e-05 max 0.000811559 sum 0.002845238

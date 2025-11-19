@@ -255,9 +255,10 @@ func handleMovieEvent(w http.ResponseWriter, r *http.Request) {
 			}
 
 			pushAndReply(w, MOVIE_EVENTS_TOPIC, &Event{
-				Id:      uuid.New().String(),
-				Type:    "movie",
-				Payload: event,
+				Id:        uuid.New().String(),
+				Type:      "movie",
+				Payload:   event,
+				Timestamp: time.Now().Format(time.RFC3339),
 			})
 		}
 	default:
@@ -281,9 +282,10 @@ func handleUserEvent(w http.ResponseWriter, r *http.Request) {
 			}
 
 			pushAndReply(w, USER_EVENTS_TOPIC, &Event{
-				Id:      uuid.New().String(),
-				Type:    "user",
-				Payload: event,
+				Id:        uuid.New().String(),
+				Type:      "user",
+				Payload:   event,
+				Timestamp: time.Now().Format(time.RFC3339),
 			})
 		}
 	default:
