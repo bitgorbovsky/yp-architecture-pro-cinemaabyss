@@ -477,9 +477,9 @@ kubectl delete namespace cinemaabyss
 
 
 **Решение**:
-- [Вывод fortio при работе БЕЗ прерывателя](task-5-fortio-report-without-breaker.txt)
-- [Статистика fortio при работе БЕЗ прерывателя](task-5-fortio-stat-without-breaker.txt)
-- [Снимок экрана cтатистики fortio при работе БЕЗ прерывателя](task-5-fortio-stat-without-breaker.png)
-- [Вывод fortio при работе c прерывателем](task-5-fortio-report-with-breaker.txt)
-- [Статистика fortio при работе с прерывателем](task-5-fortio-stat-with-breaker.txt)
-- [Снимок экрана cтатистики fortio при работе с прерывателем](task-5-fortio-stat-with-breaker.png)
+- [Вывод fortio при работе БЕЗ прерывателя](report/task-5-fortio-report-without-breaker.txt)
+- [Статистика fortio при работе БЕЗ прерывателя](report/task-5-fortio-stat-without-breaker.txt)
+- [Снимок экрана cтатистики fortio при работе БЕЗ прерывателя](report/task-5-fortio-stat-without-breaker.png)
+- [Вывод fortio при работе c прерывателем](report/task-5-fortio-report-with-breaker.txt)
+- [Статистика fortio при работе с прерывателем](report/task-5-fortio-stat-with-breaker.txt)
+- [Снимок экрана cтатистики fortio при работе с прерывателем](report/task-5-fortio-stat-with-breaker.png)
