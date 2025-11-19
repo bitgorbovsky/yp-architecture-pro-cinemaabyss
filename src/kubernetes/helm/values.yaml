@@ -118,7 +118,7 @@ kafka:
   enabled: true
   image:
     repository: wurstmeister/kafka
-    tag: 2.13-2.7.0
+    tag: 2.13-2.8.1
     pullPolicy: IfNotPresent
   replicas: 1
   resources:
