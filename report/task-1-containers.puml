@@ -1,0 +1,77 @@
+@startuml
+!include <C4/C4_Container>
+!include <C4/C4_Context>
+
+Container_Ext(ExternalCinemas, "Внешние кинотеатры")
+Container_Ext(PaymentGateway, "Платёжная система")
+Container_Ext(Recommender, "Рекомендательная система")
+
+Container(APIGateway, "Единый шлюз API")
+
+Container(Movies, "Фильмотека", \
+          $descr="Ведение базы данных фильмов")
+
+Container(MovieViews, "Просмотры фильмов", \
+          $descr="Хранение информации по просмотрам фильмов")
+
+Container(MoviesReviews, "Отзывы", \
+          $descr="Обработка отзывов и рецензий пользователей по фильмам")
+
+Container(VideoTranslation, "Трансляция видео", \
+          $descr="Потоковый сервис трансляции видео")
+ContainerDb(S3, "S3")
+Container(ExternalCinemaIntegration, "Интеграция с внешними онлайн-кинотеатрами", \
+          $descr="Сервис для управления интеграцией с внешними онлайн-кинотеатрами")
+Rel(VideoTranslation, S3, "Получение данных для видеопотока")
+Rel(Movies, S3, "Загрузка фильмов")
+Rel(VideoTranslation, ExternalCinemaIntegration, "Получение данных видеопотока от сторонних кинотеатров")
+Rel(ExternalCinemaIntegration, ExternalCinemas, "Работа с внешними кинотеатрами")
+
+Container(Auth, "Реестр пользователей", \
+          $descr="База данных пользователей")
+
+Container(UserAssets, "Пользовательские подборки фильмов", \
+          $descr="Управление пользовательскими предпочтениями и подборками фильмов")
+
+Container(Subscriptions, "Работа с подписками пользователей", \
+          $descr="Сервис для работы с подписками пользователей")
+
+Container(Recommendations, "Рекомендации")
+
+Container(Payments, "Оплата подписок", \
+          $descr="Сервис для управления оплатой подписок")
+BiRel(Payments, PaymentGateway, "Перенаправление пользователя, регистрация факта оплаты")
+
+Rel(VideoTranslation, Subscriptions, "Проверка наличия подписки")
+
+ContainerQueue(MovieEvents, "События просмотра фильмов")
+ContainerQueue(UserEvents, "События создания и изменения пользователей")
+ContainerQueue(PaymentEvents, "События оплаты")
+ContainerQueue(RecommendationEvents, "События рекомендаций")
+
+Rel(MovieViews, MovieEvents, "Регистрация факта просмотра")
+Rel(MoviesReviews, MovieEvents, "Регистрация факта появления рецензии")
+Rel(PaymentEvents, Subscriptions, "Активация подписок")
+Rel(Payments, PaymentEvents, "Запись события оплаты в шину")
+Rel(Auth, UserEvents, "Запись события создания и изменения пользователя")
+Rel(UserAssets, UserEvents, "Запись события создания и изменения подборок")
+
+Rel(UserEvents, Recommender, "Данные по пользователям и их подборкам")
+Rel(MovieEvents, Recommender, "Данные по просмотрам фильмов и рецензиям")
+Rel(Recommender, RecommendationEvents, "Выгрузка рекомендаций")
+Rel(RecommendationEvents, Recommendations, "Загрузка рекомендаций")
+
+Rel(APIGateway, Movies, "HTTP")
+Rel(APIGateway, MovieViews, "HTTP")
+Rel(APIGateway, MoviesReviews, "HTTP")
+Rel(APIGateway, Auth, "HTTP")
+Rel(APIGateway, UserAssets, "HTTP")
+Rel(APIGateway, Subscriptions, "HTTP")
+Rel(APIGateway, Payments, "HTTP")
+Rel(APIGateway, Recommendations, "HTTP")
+
+Person(User, "Мобильное приложение, браузер, настольное приложение")
+Rel(User, APIGateway, "HTTPS")
+Rel(User, VideoTranslation, "UDP, streaming protocols")
+
+@enduml

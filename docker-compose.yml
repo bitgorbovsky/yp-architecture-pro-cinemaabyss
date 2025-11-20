@@ -73,7 +73,8 @@ services:
       dockerfile: Dockerfile
     container_name: cinemaabyss-movies-service
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "8081:8081"
     environment:
@@ -89,8 +90,8 @@ services:
       dockerfile: Dockerfile
     container_name: cinemaabyss-events-service
     depends_on:
-      - postgres
-      - kafka
+      kafka:
+        condition: service_started
     ports:
       - "8082:8082"
     environment:
@@ -106,9 +107,12 @@ services:
       dockerfile: Dockerfile
     container_name: cinemaabyss-proxy-service
     depends_on:
-      - monolith
-      - movies-service
-      - events-service
+      monolith:
+        condition: service_started
+      movies-service:
+        condition: service_started
+      events-service:
+        condition: service_started
     ports:
       - "8000:8000"
     environment:
@@ -117,7 +121,7 @@ services:
       MOVIES_SERVICE_URL: http://movies-service:8081
       EVENTS_SERVICE_URL: http://events-service:8082
       GRADUAL_MIGRATION: "true"
-      MOVIES_MIGRATION_PERCENT: "50"
+      MOVIES_MIGRATION_PERCENT: "80"
     networks:
       - cinemaabyss-network
 

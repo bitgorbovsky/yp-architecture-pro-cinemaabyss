@@ -1,0 +1,9 @@
+➜  yp-architecture-pro-cinemaabyss git:(cinema) ✗ k logs -n cinemaabyss pods/events-service-6f4dff5c7f-b64w2
+2025/11/19 16:49:43 brokers: [kafka:9092]
+2025/11/19 16:49:43 producer connected
+2025/11/19 16:49:43 consumer connected
+2025/11/19 16:49:43 start events service listening 8082 port
+2025/11/19 16:49:46 consumer is active
+2025/11/19 16:53:58 event: {"id":"e572fbf2-8758-405a-8387-0af95e3cb948","type":"movie","timestamp":"","payload":{"movie_id":8,"title":"Test Movie Event","action":"viewed","user_id":4,"rating":0,"genres":null,"description":""}}; ts = 2025-11-19 16:53:58.553 +0000 UTC, topic = movie-events
+2025/11/19 16:53:58 event: {"id":"949a05d1-f3d7-4512-aa24-07f1dbb1c129","type":"user","timestamp":"","payload":{"user_id":4,"username":"testuser","email":"","action":"logged_in","timestamp":"2025-11-19T16:53:58.680Z"}}; ts = 2025-11-19 16:53:58.683 +0000 UTC, topic = user-events
+2025/11/19 16:53:58 event: {"id":"da370195-e934-478c-a5f2-792c285215db","type":"payment","timestamp":"2025-11-19T16:53:58Z","payload":{"payment_id":4,"user_id":4,"amount":9.99,"status":"completed","timestamp":"2025-11-19T16:53:58.801Z","method_type":"credit_card"}}; ts = 2025-11-19 16:53:58.805 +0000 UTC, topic = payment-events
