@@ -7,7 +7,7 @@
 Добавьте ссылку на файл в этот шаблон
 
 - [Диаграмма контейнеров](report/task-1-containers.puml)
-- [Анализ контекстов](report/tasj-1-contexts.md)
+- [Анализ контекстов](report/task-1-contexts.md)
 
 
 ## Задание 2
